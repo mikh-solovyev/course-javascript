@@ -193,7 +193,7 @@ describe('ДЗ 7.2 - Cookie editor', () => {
 
         filterNameInput.value = 'value-2';
         filterNameInput.dispatchEvent(new KeyboardEvent('input'));
-        expect(listTable.children.length).toBe(2);
+        expect(listTable.children.length).toBe(2); // Почему 2, когда должно быть 1, добавляем 2 элемента под фильтр только 1 попадает второй который с value-2
 
         addNameInput.value = 'test-cookie-name-3';
         addValueInput.value = 'test-cookie-value-3';
@@ -243,7 +243,7 @@ describe('ДЗ 7.2 - Cookie editor', () => {
 
         filterNameInput.value = '';
         filterNameInput.dispatchEvent(new KeyboardEvent('input'));
-        expect(listTable.children.length).toBe(3);
+        expect(listTable.children.length).toBe(3); // Почему 3, когда мы добавляем только 2 элемента, если в инпуте пусто то эти 2 элемента и будут показаны
       });
     });
   });
