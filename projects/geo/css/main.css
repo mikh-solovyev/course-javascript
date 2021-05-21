@@ -1,0 +1,100 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: "Areal", sans-serif;
+    font-size: 14px;
+}
+
+.wrapper {
+    height: 100%;
+}
+
+.map {
+    height: 100%;
+}
+
+.reviews {
+    max-height: 112px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #E7E7E7;
+}
+
+.reviews__item {
+    display: flex;
+    flex-direction: column;
+    color: #8F8F8F;
+    margin-bottom: 15px;
+}
+
+.reviews__name {
+    color: #2d2d2d;
+}
+
+.balloon__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.balloon__field {
+    font-size: 14px;
+    font-family: "Areal", sans-serif;
+    height: 40px;
+    border: 1px solid #CFCFCF;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.balloon__field:focus {
+    border-color: #1371C8;
+    outline: none;
+}
+
+.balloon__field_type--area {
+    height: 100px;
+    resize: none;
+}
+
+.balloon__btn {
+    font-weight: bold;
+    width: 108px;
+    border: none;
+    background: #FF8663;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.balloon__btn:hover {
+    background: #f37d5c;
+}
+
+.balloon__field_error {
+    border-color: #f00;
+}
+
+.carousel {
+    padding: 10px;
+    text-align: center;
+}
+
+.carousel__header {
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: block;
+    color: #2d2d2d;
+}
+
+.carousel__row {
+    margin-bottom: 10px;
+}

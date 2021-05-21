@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Геоотзыв</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="map" id="map"></div>
+</div>
+
+<template id="balloon">
+    <div class="balloon__content">
+        <div class="balloon__reviews reviews">
+            <ul class="reviews__list">
+                {{reviews}}
+            </ul>
+        </div>
+
+        <form action="#" class="balloon__form">
+            <input class="balloon__field" type="text" name="name" placeholder="Укажите ваше имя">
+            <input class="balloon__field" type="text" name="place" placeholder="Укажите место">
+            <textarea class="balloon__field balloon__field_type--area" name="comment" placeholder="Оставить отзыв"></textarea>
+            <button class="balloon__btn" type="submit" value="1">Добавить</button>
+            <input type="hidden" name="latitude" value="{{latitude}}">
+            <input type="hidden" name="longitude" value="{{longitude}}">
+        </form>
+    </div>
+</template>
+
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=119dcc41-7e4f-438d-9ec1-39216a407758&load=package.standard,package.clusters&amp;lang=ru-RU"
+            type="text/javascript"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>
