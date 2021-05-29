@@ -8,6 +8,9 @@ export default class loginPage {
       loginSubmit: root.querySelector(`[data-role=login-submit]`),
     };
 
+    /**
+     * Вешаем событие на обработку присоединения к чату
+     */
     this.elements.loginSubmit.addEventListener('click', (e) => {
       e.preventDefault();
       const name = this.elements.loginInput.value.trim();
@@ -21,10 +24,16 @@ export default class loginPage {
     });
   }
 
+  /**
+   * Показать окно логина
+   */
   show() {
     this.root.classList.remove('hidden');
   }
 
+  /**
+   * Скрыть окно логина
+   */
   hide() {
     this.root.classList.add('hidden');
   }

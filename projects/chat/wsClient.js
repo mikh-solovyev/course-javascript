@@ -4,6 +4,10 @@ export default class WSClient {
     this.onMessage = onMessage;
   }
 
+  /**
+   * Подключение к сокет серверу
+   * @returns {Promise<unknown>}
+   */
   connect() {
     return new Promise((resolve) => {
       this.socket = new WebSocket(this.url);
@@ -14,10 +18,18 @@ export default class WSClient {
     });
   }
 
+  /**
+   * Отправка данных на сокет сервер
+   * @param action
+   * @param data
+   */
   sendMessage(action, data) {
     this.socket.send(JSON.stringify({ action, data }));
   }
 
+  /**
+   * Отключение от сокет сервера
+   */
   disconnect() {
     this.socket.close();
   }

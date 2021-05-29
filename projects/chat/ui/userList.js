@@ -9,6 +9,9 @@ export default class UserList {
     };
   }
 
+  /**
+   * Отрисовка пользователей в окне списка пользователей
+   */
   createUsersHTML() {
     const tpl = this.elements.userTpl.innerHTML;
     let html = '';
@@ -20,6 +23,9 @@ export default class UserList {
     this.root.innerHTML = html;
   }
 
+  /**
+   * Обновление количества пользователей
+   */
   refreshCount() {
     const count = this.users.size;
     this.elements.userCount.textContent = `${count} ${this.declOfNum(count, [
@@ -29,18 +35,32 @@ export default class UserList {
     ])}`;
   }
 
+  /**
+   * Добавление пользователя
+   * @param name - имя пользователя
+   */
   add(name) {
     this.users.add(name);
     this.createUsersHTML();
     this.refreshCount();
   }
 
+  /**
+   * Удаление пользователя
+   * @param name - имя пользователя
+   */
   remove(name) {
     this.users.delete(name);
     this.createUsersHTML();
     this.refreshCount();
   }
 
+  /**
+   * Метод склонения слов
+   * @param number
+   * @param words
+   * @returns {*}
+   */
   declOfNum(number, words) {
     return words[
       number % 100 > 4 && number % 100 < 20

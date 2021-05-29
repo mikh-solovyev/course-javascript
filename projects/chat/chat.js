@@ -16,6 +16,7 @@ export default class Chat {
       this.onMessage.bind(this)
     );
 
+    // Разбиваем блоки на отдельные модули
     this.ui = {
       loginPage: new LoginPage(document.querySelector('#login'), this.onLogin.bind(this)),
       chatPage: new ChatPage(document.querySelector('#chat')),
@@ -44,8 +45,11 @@ export default class Chat {
     this.ui.loginPage.show();
   }
 
+  /**
+   * Загрузка файла на сервер
+   * @param data - фото в формате base64
+   */
   onUpload(data) {
-    // Устанавливаем фото пользователя
     fetch('http://localhost:8282/chat/upload-photo', {
       method: 'post',
       body: JSON.stringify({
@@ -55,22 +59,37 @@ export default class Chat {
     });
   }
 
+  /**
+   * Показ окна для загрузки фото
+   */
   onShowDownloadWindow() {
     this.ui.userPhoto.setName(this.ui.userInfo.get(name));
     this.ui.userPhoto.show(this.ui.userInfo.get(name));
   }
 
+  /**
+   * Показ окна с профильной фотографией
+   */
   onShowEditor() {
     this.ui.userPhoto.hide();
     this.ui.photoEditor.set(this.ui.userPhoto.getPhoto());
     this.ui.photoEditor.show();
   }
 
+  /**
+   * Отправка на сокет сервер сообщения
+   * @param message - сообщение
+   */
   onSend(message) {
     this.wsClient.sendMessage('message', message);
     this.ui.messageSender.clear();
   }
 
+  /**
+   * Присоединение пользователя к чату
+   * @param name - Имя пользователя
+   * @returns {Promise<void>}
+   */
   async onLogin(name) {
     await this.wsClient.connect();
     this.wsClient.sendMessage('enter', { name: name });
@@ -80,6 +99,10 @@ export default class Chat {
     this.ui.messageList.currentUser = name;
   }
 
+  /**
+   * Выход пользователя из чата
+   * @returns {Promise<void>}
+   */
   async onLogout() {
     await this.wsClient.disconnect();
     this.ui.userList.remove(this.ui.userInfo.get(name));
@@ -87,29 +110,39 @@ export default class Chat {
     this.ui.loginPage.show();
   }
 
+  /**
+   * Приём от сокет сервера различных типов сообщений
+   * @param action - тип события
+   * @param from - от кого
+   * @param data - дополнительные данные
+   */
   onMessage({ action, from, data }) {
     switch (action) {
+      // Вход в чат
       case 'enter': {
         this.ui.userList.add(from);
         this.ui.messageList.addMessage(`${from} вошел в чат`, { type: 'info' });
         break;
       }
+      // Выход из чата
       case 'exit': {
         this.ui.userList.remove(from);
         this.ui.messageList.addMessage(`${from} покинул чат`, { type: 'info' });
         break;
       }
+      // Добавление сообщения
       case 'message': {
-        console.log(action, from, data);
         this.ui.messageList.addMessage(data, { type: 'message' }, from);
         break;
       }
+      // Обновление пользователей
       case 'users': {
         for (const item of data) {
           this.ui.userList.add(item);
         }
         break;
       }
+      // Обновление фото пользователей
       case 'photo-changed': {
         const avatars = document.querySelectorAll(
           `[data-role=user-avatar][data-user=${data.name}]`

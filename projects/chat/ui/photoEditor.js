@@ -10,11 +10,17 @@ export default class PhotoEditor {
       saveBtn: root.querySelector(`[data-role=editor-save]`),
     };
 
+    /**
+     * Обработка закрытия окна редактора
+     */
     this.elements.cancelBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.hide();
     });
 
+    /**
+     * Обработка события сохранения фото пользователя
+     */
     this.elements.saveBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.hide();
@@ -22,15 +28,25 @@ export default class PhotoEditor {
     });
   }
 
+  /**
+   * Устрановка фотографии в зону редактора
+   * @param photo
+   */
   set(photo) {
     this.elements.editorZone.style.backgroundImage = `url(${photo})`;
     this.elements.editorInput.value = photo;
   }
 
+  /**
+   * Показ окна редактора
+   */
   show() {
     this.root.classList.remove('hidden');
   }
 
+  /**
+   * Скрытие окна редактора
+   */
   hide() {
     this.root.classList.add('hidden');
   }

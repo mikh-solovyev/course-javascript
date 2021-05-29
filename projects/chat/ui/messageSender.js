@@ -8,6 +8,7 @@ export default class MessageSender {
       messageSubmit: root.querySelector(`[data-role="message-submit"]`),
     };
 
+    // Обработка события отправки сообщения
     this.elements.messageSubmit.addEventListener('click', (e) => {
       e.preventDefault();
       const message = this.elements.messageInput.value.trim();
@@ -18,6 +19,9 @@ export default class MessageSender {
     });
   }
 
+  /**
+   * Очитста поля ввода
+   */
   clear() {
     this.elements.messageInput.value = '';
   }

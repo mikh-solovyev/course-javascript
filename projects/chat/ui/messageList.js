@@ -6,9 +6,16 @@ export default class MessageList {
     this.currentUser = null;
   }
 
+  /**
+   * Добавление сообщения в область чата
+   * @param message - сообщение
+   * @param options - дополнительные опции
+   * @param from - от кого
+   */
   addMessage(message, options = {}, from) {
     if (Object.prototype.hasOwnProperty.call(options, 'type')) {
       switch (options.type) {
+        // Иноформационное сообщение, такие как вошел или вышел из чата
         case 'info': {
           const element = document.createElement('DIV');
           element.classList.add('message__attention');
@@ -18,6 +25,7 @@ export default class MessageList {
           break;
         }
 
+        // Сообщения от пользователей
         case 'message': {
           const msg = this.creatMessage(from, message);
           this.root.appendChild(msg);
@@ -28,6 +36,12 @@ export default class MessageList {
     }
   }
 
+  /**
+   * Сложная логика создания корректного сообщения в зависимости от параметров
+   * @param from
+   * @param message
+   * @returns {DocumentFragment}
+   */
   creatMessage(from, message) {
     let rowMsg;
     const fragment = document.createDocumentFragment();

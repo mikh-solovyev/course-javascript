@@ -49,7 +49,11 @@ const server = http.createServer(async (req, res) => {
     if (/\/photos\/.+\.png/.test(req.url)) {
       const [, imageName] = req.url.match(/\/photos\/(.+\.png)/) || [];
       const fallBackPath = path.resolve(__dirname, './projects/chat/photos/no-photo.png');
-      const filePath = path.resolve(__dirname, './projects/chat/photos', imageName);
+      const filePath = path.resolve(
+        __dirname,
+        './projects/chat/photos',
+        decodeURIComponent(imageName)
+      );
 
       if (fs.existsSync(filePath)) {
         return fs.createReadStream(filePath).pipe(res);
